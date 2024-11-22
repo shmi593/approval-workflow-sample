@@ -1,0 +1,28 @@
+name: Approval workflow sample
+on:
+  workflow_dispatch:
+    inputs:
+      env:
+        type: choice
+        required: true
+        options:
+          - development
+          - production
+
+defaults:
+  run:
+    shell: bash
+
+permissions: {}
+
+jobs:
+  sample:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+
+    environment:
+      name: ${{ inputs.env }}
+      url: https://github.com
+    steps:
+      - name: show message
+        run: echo "This is a sample workflow."
